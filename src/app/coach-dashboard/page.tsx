@@ -1,4 +1,4 @@
-
+"use client";
 
 import React, { useState, useRef, useEffect } from 'react';
 import { 
@@ -7,11 +7,11 @@ import {
     BOARD_TEMPLATES
 } from './constants';
 import { Board, NewBoardPayload, ClientType } from './types';
-import { MyDayWidget, ClientWinsWidget, ClientPulseWidget, MyTasksWidget } from './components/Widgets';
-import BoardCard from './components/BoardCard';
-import TemplateCard from './components/TemplateCard';
-import NewBoardModal from './components/NewBoardModal';
+import { MyDayWidget, ClientWinsWidget, ClientPulseWidget, MyTasksWidget } from '@/components/coach-dashboard/Widgets';
 import { LayoutGrid, Search, Bell, Settings, Library, ChevronDown, LogOut, BarChart3, ArrowUpRight } from 'lucide-react';
+import BoardCard from "@/components/coach-dashboard/BoardCard";
+import NewBoardModal from "@/components/coach-dashboard/NewBoardModal";
+import TemplateCard from "@/components/coach-dashboard/TemplateCard";
 
 const App: React.FC = () => {
   // --- Persona State ---
@@ -27,11 +27,15 @@ const App: React.FC = () => {
   
   // Load data when persona changes
   useEffect(() => {
-    const data = GET_INITIAL_DATA(currentPersonaId);
-    setBoards(data.boards);
-    setTasks(data.tasks);
-    setWins(data.wins);
-    setActivity(data.activity);
+    const fetchInitialData = async () => {
+      const data = GET_INITIAL_DATA(currentPersonaId);
+      setBoards(data.boards);
+      setTasks(data.tasks);
+      setWins(data.wins);
+      setActivity(data.activity);
+    };
+
+    fetchInitialData().then();
   }, [currentPersonaId]);
 
   const [templates] = useState(BOARD_TEMPLATES);
@@ -285,7 +289,7 @@ const App: React.FC = () => {
             {/* --- Left Side: Widgets (2x2 Grid) --- */}
             <div className="lg:col-span-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {widgetOrder.map((widgetId, index) => (
+                    {widgetOrder.map((widgetId) => (
                         <div 
                             key={widgetId}
                             draggable

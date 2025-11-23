@@ -2,7 +2,7 @@
 
 
 import React, { useState } from 'react';
-import { Board, ClientType, AlertType } from '../types';
+import { Board, ClientType, AlertType } from '@/app/coach-dashboard/types';
 import { MoreHorizontal, Layout, Users, Briefcase, GraduationCap, Home, UserCog, Building, AlertTriangle, ThumbsUp, CheckCircle, X, AlertCircle, Target, Flame, FileText, ShieldCheck, TrendingUp, Award, Star, Zap, BarChart2, ArrowUpCircle, Clock, CheckSquare, Smile, Frown, ChevronLeft, ChevronRight, Handshake } from 'lucide-react';
 
 interface BoardCardProps {
